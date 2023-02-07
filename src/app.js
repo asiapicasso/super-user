@@ -66,14 +66,7 @@ async function fetchApi() {
 
 
     });
-    const usr = document.body.getElementsByClassName('user');
-    console.log(usr);
-    for (var i = 0; i < usr.length; ++i) {
-        usr[i].addEventListener('click', function () {
-            usr[i].setAttribute('data-present', usr[i].getAttribute('data-present') ? false : true);
-        });
-
-    }
+    addClickEventToUser();
 }
 
 function insertHtml(user) {
@@ -91,44 +84,19 @@ function insertHtml(user) {
         </div>`;
 }
 
-function sortByName() {
-    allUsers.sort(compare);
-}
-
-function sortByAge() {
-
-}
-
-function showUser() {
-
-    console.log(allUsers.length);
-    for (u in allUsers) {
-        insertHtml(u);
-    }
-}
-
 function addClickEventToUser() {
     const usr = document.body.getElementsByClassName('user');
 
-    console.log(usr.length);
     for (var i = 0; i < usr.length; ++i) {
-        usr[i].addEventListener('click', function () {
-            usr[i].setAttribute('data-present', usr[i].getAttribute('data-present') ? false : true);
-        });
+        const div = usr[i];
 
+        div.addEventListener('click', function (event) {
+            var val = div.getAttribute('data-present');
+
+            div.setAttribute('data-present', !val || true);
+
+        });
     }
 }
 
-
-// permet de comparer nom et prénom pour ensuite trier avec l array de users
-function compareName(a, b) {
-    if (a.last < b.last) return -1;
-
-    if (a.last > b.last) return 1;
-    return 0;
-}
-
 fetchApi();
-showUser();
-
-addClickEventToUser();
